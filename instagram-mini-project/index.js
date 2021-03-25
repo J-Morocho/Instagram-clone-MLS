@@ -7,16 +7,15 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
 
-app.get('/api/users/', async function(response, request){
+app.get('/api/users', async function(request, response){
     try{
-        const names = await db.any('SELECT name FROM users');
-        console.log(names);
+        const data = await db.any('SELECT * FROM users');
+        console.log(data);
         return response.json({
-            name: names,
+            users_data: data,
         });
     }catch(err){
-       console.log(response);
-    response.status(500).send(err);
+      response.status(500).send(err);
     }
 });
 
