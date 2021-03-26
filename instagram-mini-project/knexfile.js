@@ -6,8 +6,12 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: 'api',
-      user:     'postgres',
-      password: " ",
+      user:     'jendri',
+      password: "zornlemma",
+    },
+    // seeding database
+    seeds: {
+      directory: './seeds'
     }
   },
 
@@ -43,4 +47,5 @@ module.exports = {
     }
   }
 
+  
 };
