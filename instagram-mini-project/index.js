@@ -135,9 +135,54 @@ app.post('/api/users/', async function(request, response){
             `The following user has been added: ${request.body.name}` 
         );
     }catch(err){
+        console.log(err, "didnt work");
         response.status(404).send(err);
     }
 });
+
+
+app.post('/api/posts', async function(request, response){
+    try{
+        await await db.none('INSERT INTO posts (users_id, photo_cap, url) VALUES (${users_id}, ${photo_cap}, ${url})', request.body);
+
+        return response.send( 
+            `The following post has been created: ${request.body.url}` 
+        );
+    }catch(err){
+        console.log(err, "didnt work");
+        response.status(404).send(err);
+    }
+})
+
+app.delete('/api/posts/:id', async function(request, response){
+    try{
+        const deletePost = parseInt(request.params.id);
+        await db.none('DELETE FROM posts WHERE id=$1', deletePost);
+
+        return response.send(
+            `The following post id has been deleted: ${deletePost}`
+        )
+
+    }catch(err){
+        console.log(err, "didnt work");
+        response.status(404).send(err);
+    }
+})
+
+
+app.put('/api/posts/:id', async function(request, response){
+    try{
+       const updatePost = parseInt(request.params.id);
+       await db.any(`UPDATE posts SET photo_cap=$<photo_cap> WHERE id=${updatePost}`, request.body);
+       
+       return response.send(
+           `The following post id has been updated: ${updatePost}`
+       )
+    }catch(err){
+       console.log(err, "didnt work");
+       response.status(404).send(err);
+    }
+})
 
 
 app.get('/api/comments', comments.all)
