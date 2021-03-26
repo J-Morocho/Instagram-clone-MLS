@@ -1,7 +1,8 @@
+require('dotenv').config()
 const express = require("express");
 const pg = require('pg-promise');
 const db = require('./db');
-const app= express();
+
 const CommentsController = require('./controllers/CommentsController')
 const comments = new CommentsController()
 //const userIt = require('./usersClass');

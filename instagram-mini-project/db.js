@@ -5,8 +5,8 @@ const db = pg({
     'host': 'localhost',
     'port': 5432,
     'database': 'api',
-    'user': 'jendri',
-    'password': "zornlemma"
+    'user': process.env.USER,
+    'password': process.env.PASSWORD 
 })
 
 module.exports = db;
