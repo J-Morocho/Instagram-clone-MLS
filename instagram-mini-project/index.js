@@ -5,7 +5,7 @@ const db = require('./db');
 
 const CommentsController = require('./controllers/CommentsController')
 const comments = new CommentsController()
-//const userIt = require('./usersClass');
+const userIt = require('./controllers/usersClass');
 const app=express();
 
 app.use(express.json());
@@ -125,6 +125,20 @@ app.get('/api/posts', async function(request, response){
       response.status(404).send(err);
     }
 });
+
+
+app.post('/api/users/', async function(request, response){
+    try{
+        await db.none('INSERT INTO users (name, username, email, avatar_url) VALUES (${name}, ${username}, ${email}, ${avatar_url})', request.body);
+
+        return response.send( 
+            `The following user has been added: ${request.body.name}` 
+        );
+    }catch(err){
+        response.status(404).send(err);
+    }
+});
+
 
 app.get('/api/comments', comments.all)
 
