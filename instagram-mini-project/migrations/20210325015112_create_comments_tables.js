@@ -5,10 +5,10 @@ exports.up = function(knex) {
     table.integer('users_id')
     table.integer('posts_id')
     table.text('comment_text');
-    table.timestamps();
+    table.timestamps(true, true);
 
-    table.foreign('users_id').references('users.id');
-    table.foreign('posts_id').references('posts.id');
+    table.foreign('users_id').onDelete('CASCADE').references('users.id');
+    table.foreign('posts_id').onDelete('CASCADE').references('posts.id');
 
   })
 };
