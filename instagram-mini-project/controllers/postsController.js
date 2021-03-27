@@ -35,11 +35,11 @@ class postsController{
 
 
 
-    async posts_user_id(request, response){
+    async posts_users_id(request, response){
         try{
             const getUserId = parseInt(request.params.id);
     
-            const data = await db.one('SELECT * FROM posts WHERE user_id=$1', getUserId);
+            const data = await db.one('SELECT * FROM posts WHERE users_id=$1', getUserId);
             console.log(data);
             return response.json({
                 posts_id_data: data,
@@ -50,19 +50,6 @@ class postsController{
     }
 
 
-    async posts_url(request, response){
-        try{
-            const getUrl = parseInt(request.params.url);
-    
-            const data = await db.one('SELECT * FROM posts WHERE user_id=$1', getUrl);
-            console.log(data);
-            return response.json({
-                posts_id_data: data,
-            });
-        }catch(err){
-          response.status(404).send(err);
-        }
-    }
 
 
     async add_posts(request, response){
