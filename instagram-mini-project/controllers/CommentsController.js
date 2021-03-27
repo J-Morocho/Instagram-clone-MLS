@@ -82,7 +82,14 @@ class CommentsController {
 		try {
 			const post_id = request.params.id
 			const comment_id = request.params.comment_id
+
+			await db.any(`UPDATE comments SET comment_text=$<comment_text> WHERE posts_id=${post_id} AND id=${comment_id}`, request.body);
+
+			return response.send(
+                `The following comment id has been updated: ${comment_id}`
+            )
 		} catch (err) {
+			console.log(err);
 			response.status(500).json({
 				error: err
 			})
