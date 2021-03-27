@@ -189,9 +189,12 @@ app.get('/api/comments', comments.all)
 
 app.get('/api/post/:id/comments', comments.post_comments)
 
+app.post('/api/post/addcomment', comments.add_comment) 
+
 app.delete('/api/post/:id/comment/:comment_id', comments.delete_post_comment)
 
-app.patch('/api/post/:id/comment/:comment_id', comments.edit_comment)
+
+//app.patch('/api/post/:id/comment/:comment_id', comments.edit_comment)
 
 
 app.listen(PORT, ()=>{
