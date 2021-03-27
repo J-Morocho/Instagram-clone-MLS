@@ -87,6 +87,21 @@ class usersController{
 
 
    async user_name(request, response){
+    try{
+       const getName = request.params.name;
+
+       const data = await db.one('SELECT * FROM users WHERE name=$1', getName);
+       console.log(data);
+       return response.json({
+           users_name_data: data,
+       });
+   }catch(err){
+     response.status(404).send(err);
+   }
+ }
+
+
+   async user_username(request, response){
       try{
          const getUserName = request.params.username;
  
@@ -128,6 +143,22 @@ class usersController{
          response.status(404).send(err);
      }
    }
+
+
+   async delete_user(request,response){
+    try{
+        const deleteUser = parseInt(request.params.id);
+        await db.none('DELETE FROM users WHERE id=$1', deleteUser);
+
+        return response.send(
+            `The following user id has been deleted: ${deleteUser}`
+        )
+
+    }catch(err){
+        console.log(err, "didnt work");
+        response.status(404).send(err);
+    }
+}
 }
 
 module.exports = usersController;
