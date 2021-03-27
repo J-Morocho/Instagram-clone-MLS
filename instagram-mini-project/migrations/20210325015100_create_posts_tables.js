@@ -4,10 +4,10 @@ exports.up = function(knex) {
     table.increments('id');
     table.integer('users_id')
     table.text('photo_cap');
-    table.timestamps();
+    table.timestamps(true, true);
     table.string('url');
 
-    table.foreign('users_id').references('users.id');
+    table.foreign('users_id').onDelete('CASCADE').references('users.id');
   })
 };
 
