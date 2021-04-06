@@ -7,7 +7,7 @@ module.exports = {
     connection: {
       database: 'api',
       user:     'jendri',
-      password: "zornlemma",
+      password: "",
     },
     // seeding database
     seeds: {
